@@ -12,6 +12,7 @@ class GameScene: SKScene {
     
     private var scoreLabel : SKLabelNode?
     private var timerLabel : SKLabelNode?
+    private var hapticManager : HapticManager?
     
     var score : Int = 0
     
@@ -79,6 +80,8 @@ class GameScene: SKScene {
     }
     
     override func didMove(to view: SKView) {
+        hapticManager = HapticManager()
+        
         self.setupScene()
         spawnBubbles()
     }
@@ -93,6 +96,10 @@ class GameScene: SKScene {
             
             score += 1
             scoreLabel?.text = "\(score)"
+            
+            DispatchQueue.global().async { [weak self] in
+                self?.hapticManager?.playPop()
+            }
         }
     }
     
