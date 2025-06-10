@@ -18,7 +18,7 @@ class StartScene: SKScene, ButtonDelegate {
     
     private func setupScene() {
         // Set background color
-        backgroundColor = SKColor.black
+        backgroundColor = SKColor.white
         
         // Add title
         let titleLabel = SKLabelNode(text: "Bubble Pop")
@@ -43,7 +43,6 @@ class StartScene: SKScene, ButtonDelegate {
         addChild(multiplayerButton)
     }
     
-    // MARK: - ButtonDelegate
     func buttonClicked(button: Button) {
         switch button.buttonId {
         case "singlePlayer":
@@ -62,18 +61,16 @@ class StartScene: SKScene, ButtonDelegate {
     }
     
     private func transitionToGameScene(multiplayer: Bool) {
-        // Example transition - replace with your actual game scene
-        // let gameScene = GameScene(size: self.size)
-        // gameScene.isMultiplayer = multiplayer
-        //
-        // let transition = SKTransition.fade(withDuration: 0.5)
-        // view?.presentScene(gameScene, transition: transition)
-        
-        // For now, just print what would happen
         if multiplayer {
             print("Would transition to multiplayer game scene")
         } else {
-            print("Would transition to single player game scene")
+            if let gameScene = SKScene(fileNamed: "GameScene") as? GameScene {
+                gameScene.scaleMode = .aspectFill
+                gameScene.size = self.size
+                        
+                let transition = SKTransition.fade(withDuration: 0.75)
+                view?.presentScene(gameScene, transition: transition)
+           }
         }
     }
 }

@@ -40,22 +40,24 @@ class Button: SKSpriteNode {
     }
     
     // Convenience initializer for text buttons
-    convenience init(text: String, fontSize: CGFloat = 24, type: TouchType = .up, buttonId: String = "") {
+    convenience init(text: String, fontSize: CGFloat = 24, cornerRadius: CGFloat = 10, type: TouchType = .up, buttonId: String = "") {
         // Create a simple colored rectangle as background
         let texture = SKTexture()
         self.init(texture: texture, type: type, buttonId: buttonId)
         
         // Remove the texture and use color instead
         self.texture = nil
-        self.color = SKColor.systemBlue
-        self.size = CGSize(width: 200, height: 60)
+        self.color = SKColor.red
+        self.size = CGSize(width: 175, height: 40)
+        
+        //let shape = SKShapeNode(rect: CGRect(x: 0, y: 0, width: 175, height: 40), cornerRadius: cornerRadius)
         
         // Add text label
         let label = SKLabelNode(text: text)
         label.fontName = "Arial-BoldMT"
         label.fontSize = fontSize
         label.fontColor = .white
-        label.position = CGPoint(x: 0, y: -8) // Slight offset to center vertically
+        label.position = CGPoint(x: 0, y: 0) // Slight offset to center vertically
         label.verticalAlignmentMode = .center
         label.horizontalAlignmentMode = .center
         self.addChild(label)
